@@ -1,5 +1,4 @@
 from tkinter import *
-from turtle import end_fill
 
 root = Tk()
 

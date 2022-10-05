@@ -50,3 +50,9 @@ def afficheTemps(temps):
     if temps[3] > 1 : print(temps[3], "secondes", end = " ")
     elif temps[3] == 1 : print("1 seconde", end = " ")
 
+
+mois = [31,28,31,30,31,30,31,31,30,31,30,31]
+toto = [0]
+for i in range(12):
+    toto.append(mois[i] + toto[i])
+print(toto)
