@@ -30,17 +30,18 @@ def clear() :
     e_last.delete(0, END)
     e_op.delete(0, END)
     e.delete(0, END)
+    e.insert(0, '0')
 
 def equals() :
     baltazar = float(e.get())
     if (str(e.get())[-1] in '1234567890') and (len(str(e_last.get())) > 0) and (len(str(e_op.get())) == 1) :
         e.delete(0,END)
         if str(e_op.get()) == '+' :
-            e.insert(0, float(e_last.get()) + baltazar)
+            e.insert(0, "{:.2f}".format(float(e_last.get()) + baltazar))
         elif str(e_op.get()) == '-' :
-            e.insert(0, float(e_last.get()) - baltazar)
+            e.insert(0, "{:.2f}".format(float(e_last.get()) - baltazar))
         elif str(e_op.get()) == '*' :
-            e.insert(0, float(e_last.get()) * baltazar)
+            e.insert(0, "{:.2f}".format(float(e_last.get()) * baltazar))
         elif str(e_op.get()) == '/' :
             e.insert(0, "{:.2f}".format(float(e_last.get()) / baltazar))
     else :
@@ -60,7 +61,7 @@ menu_bar.add_cascade(label="Fichier", menu=file_menu)
 
 
 e = Entry(root, borderwidth=10, bg='black', fg='white', width=26, font=('Arial', 20))
-e_last = Entry(root, borderwidth=10, bg='black', fg='red', width=19, font=('Arial', 20))
+e_last = Entry(root, borderwidth=10, bg='black', fg='red', width=19, font=('Arial', 20), text='0')
 e_op = Entry(root, borderwidth=10, bg='black', fg='red', width=5, font=('Arial', 20))
 
 b1 = Button(root, width=13, height=5, command=lambda: buttonPress(1), text='1')
@@ -89,6 +90,8 @@ b_comma = Button(root, width=13, height=5, command=lambda: buttonPress('.'), tex
 e.grid(row=1, column=0, columnspan=4, pady=5, padx=5)
 e_last.grid(row=0, column=0, pady=5, padx=5, columnspan=3)
 e_op.grid(row=0, column=3, pady=5, padx=5)
+
+e.insert(0, '0')
 
 b1.grid(pady=5, row=5, column=0)
 b2.grid(pady=5, row=5, column=1)
