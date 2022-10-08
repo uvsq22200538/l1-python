@@ -51,8 +51,66 @@ def afficheTemps(temps):
     elif temps[3] == 1 : print("1 seconde", end = " ")
 
 
-mois = [31,28,31,30,31,30,31,31,30,31,30,31]
-toto = [0]
-for i in range(12):
-    toto.append(mois[i] + toto[i])
-print(toto)
+
+
+"""
+def tempsEnDate(temps):
+    return (temps[0]//365, temps[0]%365, temps[1], temps[2], temps[3])
+
+def afficheDate(date):
+    jour_mois = (0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365)
+    nom_mois = (' ', 'janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre')
+    jour = 1
+    for i in range(1,13) :
+        if date[1] < jour_mois[i] :
+            jour += date[1] - jour_mois[i-1]
+            break
+    
+
+    print(str(jour) + ' ' + nom_mois[i] + ' ' + str(date[0]+1970) + ' à ' + str(date[2]) + ':' + str(date[3]) + ':' + str(date[4]))
+    
+temps = secondeEnTemps(1000000000)
+#temps = secondeEnTemps(360000)
+afficheTemps(temps)
+afficheDate(tempsEnDate(temps))
+"""
+
+"""
+def bisextile(jour):
+    date = 1970
+    bis_count = 0
+    while jour > 0 :
+        if date % 4 == 0 and (date % 100 != 0 or date % 400 == 0) :
+            bis_count += 1
+            date += 1
+            jour -= 366
+        else :
+            date += 1
+            jour -= 365
+    return bis_count
+    
+bisextile(20000)
+"""
+
+"""
+def nombreBisextile(jour):
+    date = 1970
+    bis_count = 0
+    while jour > 0 :
+        if date % 4 == 0 and (date % 100 != 0 or date % 400 == 0) :
+            bis_count += 1
+            date += 1
+            jour -= 366
+        else :
+            date += 1
+            jour -= 365
+    return bis_count
+
+def tempsEnDateBisextile(date):
+    
+    return (temps[0]//365, temps[0]%365, temps[1], temps[2], temps[3])
+   
+temps = secondeEnTemps(1000000000)
+afficheTemps(temps)
+afficheDate(tempsEnDateBisextile(temps))
+"""
