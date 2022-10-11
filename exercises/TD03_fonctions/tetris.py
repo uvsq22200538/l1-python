@@ -56,7 +56,7 @@ def speedup(a):
 # when freezed blocks reaches the last row
 def game_over():
     canvas.configure(bg='red')
-    canvas.itemconfigure(ALL, fill='white', outline='black')
+    canvas.itemconfigure(ALL, fill='black', outline='black')
     canvas.create_text(WIDTH//2,HEIGHT//2,text='GAME OVER',font=('consolas',20),fill='white')
 
 # chacks for collisions with walls or freezed blocks
@@ -129,7 +129,7 @@ def new_block():
     for y, x in chosen :
         canvas.create_rectangle(x*SIZE, y*SIZE, x*SIZE+SIZE, y*SIZE+SIZE, fill=color,outline='white', tag='block')
 
-# allows rotation of the block
+# allows rotation of the block only if there is no obstacles
 def rotate(direction):
     global chosen, variant, var
     if direction == 'right' :
@@ -143,6 +143,11 @@ def rotate(direction):
         else :
             variant = len(BLOCKS[number])-1
     chosen = BLOCKS[number][variant]
+    if check_collision():
+        if direction == 'right':
+            rotate('left')
+        else :
+            rotate('right')
     canvas.delete('block')
     for y, x in chosen :
         canvas.create_rectangle(x*SIZE +x1, y*SIZE +y1, x*SIZE + SIZE +x1, y*SIZE + SIZE +y1, fill=color,outline='white', tag='block')

@@ -114,6 +114,3 @@ temps = secondeEnTemps(1000000000)
 afficheTemps(temps)
 afficheDate(tempsEnDateBisextile(temps))
 """
-l = [[0,'#FF0000aaaa'], [4], [1,'#FFzefjezjzefjnzef00FF']]
-l.sort()
-print(l)
