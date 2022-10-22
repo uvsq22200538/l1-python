@@ -59,10 +59,17 @@ def spin():
     if aspin :
         root.after(25, spin)
 
+faces = False
+def showfaces():
+    global faces
+    if faces : faces = False
+    else : faces = True
+    load()
+
 
 
 CheckVar = IntVar()
-b1 = Checkbutton(root, text='Show faces', font=('Arial', 10), command=myfunc)
+b1 = Checkbutton(root, text='Show faces', font=('Arial', 10), command=showfaces)
 b1.grid(row=0,column=1)
 b2 = Checkbutton(root, text='Show ellipses', font=('Arial', 10), command=showellipses)
 b2.grid(row=0,column=0)
@@ -108,6 +115,7 @@ def load():
                 canvas.create_rectangle(x-3, y-a*ecart-3, x+3, y-a*ecart+3, outline='green', fill='green')
             coord.append([x, y-a*ecart])
             coord2.append([x, y+a*ecart])
+
     if arteses :
         for i in range(4):
             canvas.create_line(coord[i][0], coord[i][1], coord[i-1][0], coord[i-1][1], fill='white', width=2)
@@ -116,34 +124,35 @@ def load():
 
             canvas.create_line(coord[i][0], coord[i][1], coord[i][0], coord2[i][1], fill='white', width=2)
 
+    if faces :
         l = []
         for i in range(4):
             l.append([coord[i-1][0],coord[i-1][1], coord[i][0],coord[i][1], coord2[i][0],coord2[i][1], coord2[i-1][0],coord2[i-1][1]])
         l1 = [[coord2[0][0],coord2[0][1], coord2[1][0],coord2[1][1], coord2[2][0],coord2[2][1], coord2[3][0],coord2[3][1]],
-            [coord[0][0],coord[0][1], coord[1][0],coord[1][1], coord[2][0],coord[2][1], coord[3][0],coord[3][1]]]
+        [coord[0][0],coord[0][1], coord[1][0],coord[1][1], coord[2][0],coord[2][1], coord[3][0],coord[3][1]]]
         canvas.create_polygon(l1[0], fill='yellow')
         load_faces(a2, l)
         canvas.create_polygon(l1[1], fill='blue')
 
 p = 0
 z = a2
+COULEURS = ('red', 'green', 'cyan', 'orange')
 def load_faces(a2, l):
     global p, z
-    if z < a2  and a2%32 == 0 :
+    if z > a2  and (a2)%64  == 32 :
         if p<3 :
             p+=1
         else :
             p=0
-    elif z > a2 and a2%32 == 0 :
+    elif z < a2 and (a2)%64 == 32 :
         if p>0 :
             p-=1
         else :
             p=3
     z = a2
-    print(p)
     
-    canvas.create_polygon(l[p-1], fill='red')
-    canvas.create_polygon(l[p], fill='green')
+    canvas.create_polygon(l[p-1], fill=COULEURS[p-1])
+    canvas.create_polygon(l[p], fill=COULEURS[p])
 
 
 sw = False

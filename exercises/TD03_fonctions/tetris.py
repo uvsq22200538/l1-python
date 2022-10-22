@@ -12,7 +12,7 @@ SIZE = 20
 SPEED = 150
 BACKGROUND_COLOR = '#000000'
 # all possible block colors
-COLORS = ('#FF0000', '#00FF00', '#0000FF', '#FF00FF')
+COLORS = ('#FF0000', '#0000FF', 'grey', 'grey', 'grey', '#FF0000', '#0000FF', 'grey')
 # setting all blocks and their variations
 BLOCKS = (
     # 1
@@ -55,6 +55,7 @@ def speedup(a):
 
 # when freezed blocks reaches the last row
 def game_over():
+    canvas.delete('next')
     canvas.configure(bg='red')
     canvas.itemconfigure(ALL, fill='black', outline='black')
     canvas.create_text(WIDTH//2,HEIGHT//2,text='GAME OVER',font=('consolas',20),fill='white')
@@ -113,22 +114,24 @@ def next_turn():
         game_over()
 
 # choses a random block, block variant and color
+
 def choose_rand():
     global chosen, number, color, variant
     number = randint(0,len(BLOCKS)-1)
     variant = randint(0,len(BLOCKS[number])-1)
     chosen = BLOCKS[number][variant]
-    color = COLORS[randint(0, len(COLORS)-1)]
+    color = COLORS[number]
 
 # creates a new block
 def new_block():
     global x1, y1
     x1, y1 = 0, 0
     canvas.delete('block')
+    canvas.delete('next')
     choose_rand()
     for y, x in chosen :
         canvas.create_rectangle(x*SIZE, y*SIZE, x*SIZE+SIZE, y*SIZE+SIZE, fill=color,outline='white', tag='block')
-
+    
 # allows rotation of the block only if there is no obstacles
 def rotate(direction):
     global chosen, variant, var
@@ -149,6 +152,7 @@ def rotate(direction):
         else :
             rotate('right')
     canvas.delete('block')
+    #canvas.create_rectangle(WIDTH,0,WIDTH-100,100,fill='#FFFFFF',outline='#FFFFFF')
     for y, x in chosen :
         canvas.create_rectangle(x*SIZE +x1, y*SIZE +y1, x*SIZE + SIZE +x1, y*SIZE + SIZE +y1, fill=color,outline='white', tag='block')
         if x*SIZE +x1 < 0 :
